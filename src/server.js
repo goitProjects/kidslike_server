@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
+const express = require("express");
 const passport = require("passport");
 const config = require("../config");
 const initializePassport = require("../src/passport");
@@ -27,6 +28,7 @@ const startServer = port => {
     .use(bodyParser.json())
     .use(morgan("dev"))
     .use(passport.initialize())
+    .use(express.static("public"))
     .use("/api", routes)
     .use(errorHandler);
 
