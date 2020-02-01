@@ -31,6 +31,7 @@ const scheduleTasks = () => {
   console.log("inputDate schedule :", inputDate.toString());
   let tasksJob = schedule.scheduleJob(inputDate, function() {
     console.log("schudle");
+
     inputDate = getNextDay(new Date(), 7);
     console.log(inputDate.toString());
     resetTasks();
@@ -43,7 +44,8 @@ const scheduleRunner = () => {
     .lean()
     .exec(function(err, tasks) {
       if (err) throw new Err(err);
-      const currentDate = new Date(tasks[0].days[0].date);
+      // const currentDate = new Date(tasks[0].days[0].date);
+      const currentDate = new Date(2020, 1, 02);
       const nowDate = new Date(new Date().getTime());
       const currentMonday = getNextDay(currentDate).getDate();
       const nowMonday = getNextDay(nowDate).getDate();
@@ -51,7 +53,7 @@ const scheduleRunner = () => {
       console.log("nowMonday :", nowMonday);
       console.log("currentMonday === nowMonday :", currentMonday === nowMonday);
       if (currentMonday !== nowMonday) {
-        return resetTasks();
+        resetTasks();
       }
       scheduleTasks();
     });
